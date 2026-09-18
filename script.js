@@ -61,7 +61,10 @@ function compactCountdown(target){
 }
 function updateMiniCounts(){
   $('#birthdayCountdown').textContent = compactCountdown(nextOccurrence(9,13));
-  $('#anniversaryCountdown').textContent = compactCountdown(nextOccurrence(5,24));
+  const nextAnniversary = new Date('2026-09-24T00:00:00-03:00');
+  $('#anniversaryCountdown').textContent = nextAnniversary > new Date()
+    ? compactCountdown(nextAnniversary)
+    : 'Hoje é o nosso dia ❤️';
 }
 updateMiniCounts(); setInterval(updateMiniCounts,60000);
 
@@ -154,3 +157,36 @@ function spawnHeart(x, y){
 document.addEventListener('click', e => {
   if (e.target.closest('button, a, .photo')) spawnHeart(e.clientX, e.clientY);
 });
+
+
+// ===== Extra romantic interactions =====
+const memories = [
+  'Nosso primeiro encontro em 24/06/2026 — o dia em que a tela virou abraço. ❤️',
+  'O nosso primeiro jantar juntos. 🍽️♡',
+  'O primeiro beijo — e o começo oficial do nosso “nós”. 💋',
+  'Comprar as coisas da nossa casa e perceber que o futuro já começou. 🏠',
+  'Praia, mar azul, pôr do sol e você do meu lado. 🌊',
+  'Você ter virado vascaína por mim. Isso foi amor em nível avançado. 😂⚫⚪',
+  'Nosso “HUMMMM… AAAAH” que ninguém no mundo entende como a gente. 😚',
+  'Promessa de dedinho: continuar escolhendo um ao outro. 🤞',
+  'Coxinha, risada e qualquer momento simples que fica especial só porque é com você. 🥟❤️'
+];
+function burstHearts(x = innerWidth/2, y = innerHeight/2, amount = 24){
+  const icons = ['♥','♡','💗','💙','✨'];
+  for(let i=0;i<amount;i++){
+    const h = document.createElement('span');h.className='love-burst-heart';h.textContent=icons[Math.floor(Math.random()*icons.length)];h.style.left=`${x}px`;h.style.top=`${y}px`;h.style.setProperty('--dx',`${(Math.random()-.5)*320}px`);h.style.setProperty('--dy',`${-70-Math.random()*260}px`);h.style.setProperty('--rot',`${(Math.random()-.5)*220}deg`);h.style.color=Math.random()>.55?'#ff8fac':'#9edaff';h.style.animationDelay=`${Math.random()*.12}s`;document.body.appendChild(h);setTimeout(()=>h.remove(),1500);
+  }
+}
+$('#kissBtn')?.addEventListener('click', e=>{ $('#kissMessage')?.classList.add('show'); const r=e.currentTarget.getBoundingClientRect(); burstHearts(r.left+r.width/2,r.top+r.height/2,34); setTimeout(()=>$('#kissMessage')?.classList.remove('show'),3200); });
+$('#memoryBtn')?.addEventListener('click', e=>{ const current=$('#memoryText')?.textContent||''; let next=memories[Math.floor(Math.random()*memories.length)]; if(memories.length>1){while(next===current)next=memories[Math.floor(Math.random()*memories.length)]} if($('#memoryText'))$('#memoryText').textContent=next; const r=e.currentTarget.getBoundingClientRect();burstHearts(r.left+r.width/2,r.top+r.height/2,14); });
+$('#starBtn')?.addEventListener('click', e=>{ $('#starMessage')?.classList.toggle('spark');const r=e.currentTarget.getBoundingClientRect();burstHearts(r.left+r.width/2,r.top+r.height/2,28); });
+
+// ===== YouTube in-site music player =====
+let lovePlayer=null,lovePlayerReady=false,lovePlaying=false;
+window.onYouTubeIframeAPIReady=function(){
+  if(!window.YT||!YT.Player)return;
+  lovePlayer=new YT.Player('ytPlayer',{height:'259',width:'460',videoId:'-YzDsDMYqdw',playerVars:{playsinline:1,controls:1,rel:0,modestbranding:1},events:{onReady:()=>{lovePlayerReady=true;},onStateChange:(event)=>{if(!window.YT)return;if(event.data===YT.PlayerState.PLAYING)setMusicUi(true);if(event.data===YT.PlayerState.PAUSED||event.data===YT.PlayerState.ENDED)setMusicUi(false);}}});
+};
+function setMusicUi(playing){lovePlaying=playing;const btn=$('#musicPlayBtn');if(btn){$('.music-icon',btn).textContent=playing?'❚❚':'▶';$('.music-label',btn).textContent=playing?'Pausar nossa música':'Tocar nossa música';}$('#musicNow')?.classList.toggle('active',playing);$('#vinylDisc')?.classList.toggle('paused',!playing);if(playing)$('.youtube-audio')?.classList.add('started');}
+$('#vinylDisc')?.classList.add('paused');
+$('#musicPlayBtn')?.addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();burstHearts(r.left+r.width/2,r.top+r.height/2,16);$('.youtube-audio')?.classList.add('started');if(lovePlayerReady&&lovePlayer){if(lovePlaying)lovePlayer.pauseVideo();else lovePlayer.playVideo();return;}const holder=$('#ytPlayer');if(holder&&!holder.querySelector('iframe')){holder.innerHTML='<iframe width="460" height="259" src="https://www.youtube.com/embed/-YzDsDMYqdw?autoplay=1&playsinline=1&rel=0" title="Tudo Que Você Quiser - Luan Santana" allow="autoplay; encrypted-media" allowfullscreen></iframe>';setMusicUi(true);}});

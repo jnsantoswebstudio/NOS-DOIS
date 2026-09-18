@@ -200,6 +200,37 @@
       </div>
     </section>
 
+    <section class="playful-love section">
+      <div class="section-head reveal">
+        <p class="kicker">Pequenas coisas que são totalmente a nossa cara</p>
+        <h2>Um site que também <em>brinca com o nosso amor</em></h2>
+      </div>
+      <div class="playful-grid">
+        <article class="playful-card kiss-card reveal">
+          <div class="playful-icon">😚</div>
+          <p class="mini-label">NOSSO BEIJINHO</p>
+          <h3>Quer um beijo do Nenequinho?</h3>
+          <p>Tem coisa que só a gente entende — e essa é uma delas.</p>
+          <button id="kissBtn" class="special-btn" type="button">Aperta aqui 💋</button>
+          <div class="kiss-message" id="kissMessage">HUMMMM… AAAAH 😚❤️</div>
+        </article>
+        <article class="playful-card memory-card reveal">
+          <div class="playful-icon">🎲</div>
+          <p class="mini-label">LEMBRANÇA ALEATÓRIA</p>
+          <h3>Um pedacinho de nós</h3>
+          <p id="memoryText">Clique para o site escolher uma lembrança, promessa ou detalhe nosso.</p>
+          <button id="memoryBtn" class="special-btn blue" type="button">Sortear uma lembrança ✨</button>
+        </article>
+        <article class="playful-card forever-card reveal">
+          <div class="playful-icon">🤞</div>
+          <p class="mini-label">PROMESSA</p>
+          <h3>Dedinho não volta atrás.</h3>
+          <p>Casa, casamento, filhos, praia, sonhos, risadas e nós dois escolhendo um ao outro todos os dias.</p>
+          <div class="forever-sign">J + L · ∞</div>
+        </article>
+      </div>
+    </section>
+
     <div class="wave-transition" aria-hidden="true">
       <svg viewBox="0 0 1440 180" preserveAspectRatio="none"><path d="M0,70 C250,170 420,10 700,90 C980,170 1170,30 1440,100 L1440,180 L0,180 Z"></path></svg>
     </div>
@@ -243,6 +274,20 @@
       </div>
     </section>
 
+    <section class="cosmic-love section">
+      <div class="cosmic-stars" aria-hidden="true"></div>
+      <div class="cosmic-content reveal">
+        <p class="kicker">Entre todas as coincidências do universo</p>
+        <h2>Eu ainda escolheria <em>encontrar você.</em></h2>
+        <p>Dois anos atrás o Instagram colocou nossos caminhos perto. Em 24/06/2026, às 21h, o “eu e você” ganhou uma data. E desde então eu só quero descobrir quantas coisas cabem dentro do nosso para sempre.</p>
+        <div class="cosmic-date">
+          <span>24</span><i>·</i><span>06</span><i>·</i><span>2026</span><b>21:00</b>
+        </div>
+        <button class="star-btn" id="starBtn" type="button">Tocar nossa estrela ✦</button>
+        <p class="star-message" id="starMessage">“Entre o infinito das estrelas e a imensidão dos dias, meu coração sempre soube que você seria meu destino.”</p>
+      </div>
+    </section>
+
     <section class="future section" id="futuro">
       <div class="section-head reveal">
         <p class="kicker">Não é só sobre o que já vivemos</p>
@@ -276,18 +321,29 @@
 
     <section class="music-section section" id="musica">
       <div class="vinyl-wrap reveal" aria-hidden="true">
-        <div class="vinyl"><div class="label">J ♡ L</div></div>
+        <div class="vinyl" id="vinylDisc"><div class="label">J ♡ L</div></div>
       </div>
       <div class="music-copy reveal">
         <p class="kicker">Quando eu penso em você</p>
-        <h2>Amor de Fim de Noite</h2>
-        <p class="artist">Orochi</p>
+        <h2>Tudo Que Você Quiser</h2>
+        <p class="artist">Luan Santana</p>
         <p>Tem músicas que a gente escuta. E tem música que vira uma pessoa. Essa, para mim, tem você.</p>
         <div class="song-inspired">
           <h3>O que essa música me faz sentir</h3>
-          <p>Se um dia fosse preciso atravessar qualquer distância, inventar um caminho impossível ou remar contra qualquer mar, eu iria do mesmo jeito — só para te ver, te abraçar e te lembrar que a minha vida boa é com você.</p>
+          <p>Ela me lembra que amar você é escolher dividir a vida: meus planos, minhas conquistas, a nossa casa, a praia, os dias comuns e todos os sonhos que ainda vão virar realidade.</p>
         </div>
-        <a class="play-link" href="https://www.youtube.com/watch?v=jBE_X3cMCyM" target="_blank" rel="noopener">▶ Ouvir nossa música</a>
+        <div class="music-actions">
+          <button class="play-link music-toggle" id="musicPlayBtn" type="button" aria-label="Tocar Tudo Que Você Quiser no site">
+            <span class="music-icon">▶</span>
+            <span class="music-label">Tocar nossa música</span>
+          </button>
+          <a class="youtube-link" href="https://www.youtube.com/watch?v=-YzDsDMYqdw" target="_blank" rel="noopener">abrir vídeo oficial ↗</a>
+        </div>
+        <div class="music-now" id="musicNow" aria-live="polite">
+          <span class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <div><small>TOCANDO AGORA</small><strong>Tudo Que Você Quiser · Luan Santana</strong></div>
+        </div>
+        <div class="youtube-audio" aria-hidden="true"><div id="ytPlayer"></div></div>
       </div>
     </section>
 
@@ -313,7 +369,7 @@
       </div>
       <div class="date-cards">
         <article class="date-card reveal"><p>Seu aniversário 🎂</p><h3>13 de outubro</h3><div class="mini-count" id="birthdayCountdown">calculando...</div></article>
-        <article class="date-card reveal"><p>Nosso próximo aniversário ❤️</p><h3>24 de junho</h3><div class="mini-count" id="anniversaryCountdown">calculando...</div></article>
+        <article class="date-card reveal special-date"><p>Nosso próximo aniversário ❤️</p><h3>24 de setembro de 2026</h3><div class="mini-count" id="anniversaryCountdown">calculando...</div><small>mais um capítulo do nosso “nós”</small></article>
       </div>
     </section>
 
@@ -395,6 +451,7 @@
     </div>
   </div>
 
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js"></script>
 </body>
 </html>
